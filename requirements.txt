@@ -1,5 +1,5 @@
 future~=1.0.0
 ttkbootstrap~=1.10.1
 darkdetect~=0.8.0
-Pillow~=9.0.1
-setuptools~=59.6.0
+Pillow>=10.3.0
+setuptools~=70.0.0
