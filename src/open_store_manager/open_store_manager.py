@@ -4,6 +4,8 @@ import darkdetect
 import ttkbootstrap as ttk
 from PIL import ImageTk, Image
 from ttkbootstrap.constants import *
+from ttkbootstrap.toast import ToastNotification
+from ttkbootstrap.tooltip import ToolTip
 
 from database_modules import SQLiteVerify
 from resources.constants import *
@@ -42,42 +44,49 @@ class OpenStoreManager(ttk.Window):
                                           text="Fidelity card",
                                           compound=LEFT, image=self.fidelity_image,
                                           command=self.open_fidelity_card_window)
+        ToolTip(self.fidelity_button, text="Apri gestione fidelity cards")
         self.fidelity_button.grid(column=0, row=0, padx=1)
         self.cash_register_image = ImageTk.PhotoImage(Image.open("resources/assets/cash_register.png"))
         self.cash_register_button = ttk.Button(self.top_bar_frame,
                                                text="Flussi cassa",
                                                compound=LEFT, image=self.cash_register_image,
                                                command=self.open_cash_flow_window)
+        ToolTip(self.cash_register_button, "Apri gestione flussi di cassa")
         self.cash_register_button.grid(column=1, row=0, padx=1)
         self.delivery_image = ImageTk.PhotoImage(Image.open("resources/assets/delivery.png"))
         self.delivery_button = ttk.Button(self.top_bar_frame,
                                           text="Consegne",
                                           compound=LEFT, image=self.delivery_image,
                                           command=self.open_deliveries_window)
+        ToolTip(self.delivery_button, "Apri gestione consegne")
         self.delivery_button.grid(column=2, row=0, padx=1)
         self.documents_image = ImageTk.PhotoImage(Image.open("resources/assets/document.png"))
         self.documents_button = ttk.Button(self.top_bar_frame,
                                            text="Documenti",
                                            compound=LEFT, image=self.documents_image,
                                            command=self.open_documents_window)
+        ToolTip(self.documents_button, "Apri gestione documenti")
         self.documents_button.grid(column=4, row=0, padx=1)
         self.customers_image = ImageTk.PhotoImage(Image.open("resources/assets/customer.png"))
         self.customers_button = ttk.Button(self.top_bar_frame,
                                            text="Clienti",
                                            compound=LEFT, image=self.customers_image,
                                            command=self.open_customers_window)
+        ToolTip(self.customers_button, "Apri gestione clienti")
         self.customers_button.grid(column=5, row=0, padx=1)
         self.suppliers_image = ImageTk.PhotoImage(Image.open("resources/assets/supplier.png"))
         self.suppliers_button = ttk.Button(self.top_bar_frame,
                                            text="Fornitori",
                                            compound=LEFT, image=self.suppliers_image,
                                            command=self.open_suppliers_window)
+        ToolTip(self.suppliers_button, "Apri gestione fornitori")
         self.suppliers_button.grid(column=6, row=0, padx=1)
         self.warehouse_image = ImageTk.PhotoImage(Image.open("resources/assets/warehouse.png"))
         self.warehouse_button = ttk.Button(self.top_bar_frame,
                                            text="Magazzino",
                                            compound=LEFT, image=self.warehouse_image,
                                            command=self.open_warehouse_window)
+        ToolTip(self.warehouse_button, "Apri gestione magazzino")
         self.warehouse_button.grid(column=7, row=0, padx=1)
 
         # Dashboard
@@ -109,6 +118,14 @@ class OpenStoreManager(ttk.Window):
         # Status bar
         self.status_bar = ttk.Label(self, text="Pronto...", relief=SUNKEN)
         self.status_bar.pack(fill=X, anchor=S)
+
+        toast = ToastNotification(
+            title="Benvenuto in Open Store Manager",
+            message="Il progetto è ancora in sviluppo!",
+            duration=3000,
+            icon="OSM",
+        )
+        toast.show_toast()
 
     def open_documents_window(self):
         win = DocumentsViewer(master=self, win_title=f"{FORMAL_NAME} - Gestione documenti")
