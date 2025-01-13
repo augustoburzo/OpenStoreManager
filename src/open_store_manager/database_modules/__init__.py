@@ -1,3 +1,2 @@
 from .sqlite_verify import SQLiteVerify
-
-print("Database module loaded")
+from .customers_manager import CustomersManager

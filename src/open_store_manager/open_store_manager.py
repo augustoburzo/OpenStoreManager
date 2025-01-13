@@ -7,7 +7,8 @@ from ttkbootstrap.constants import *
 
 from database_modules import SQLiteVerify
 from resources.constants import *
-from window_modules import DocumentsViewer, FidelityCardViewer, DeliveriesViewer, CustomersViewer, CashFlowViewer
+from window_modules import (DocumentsViewer, FidelityCardViewer, DeliveriesViewer, CustomersViewer, CashFlowViewer,
+                            SuppliersViewer, WarehouseViewer)
 
 
 class OpenStoreManager(ttk.Window):
@@ -72,6 +73,12 @@ class OpenStoreManager(ttk.Window):
                                            compound=LEFT, image=self.suppliers_image,
                                            command=self.open_suppliers_window)
         self.suppliers_button.grid(column=6, row=0, padx=1)
+        self.warehouse_image = ImageTk.PhotoImage(Image.open("resources/assets/warehouse.png"))
+        self.warehouse_button = ttk.Button(self.top_bar_frame,
+                                           text="Magazzino",
+                                           compound=LEFT, image=self.warehouse_image,
+                                           command=self.open_warehouse_window)
+        self.warehouse_button.grid(column=7, row=0, padx=1)
 
         # Dashboard
         self.dashboard_label_frame = ttk.LabelFrame(self, text="Dashboard")
@@ -124,7 +131,12 @@ class OpenStoreManager(ttk.Window):
         win.focus_set()
 
     def open_suppliers_window(self):
-        raise NotImplementedError("Funzione non implementata")
+        win = SuppliersViewer(master=self, win_title=f"{FORMAL_NAME} - Gestione fornitori")
+        win.focus_set()
+
+    def open_warehouse_window(self):
+        win = WarehouseViewer(master=self, win_title=f"{FORMAL_NAME} - Gestione magazzino")
+        win.focus_set()
 
     def set_status(self, status):
         self.status_bar.configure(text=status)
