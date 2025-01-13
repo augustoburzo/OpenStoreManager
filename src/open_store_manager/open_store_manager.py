@@ -5,8 +5,9 @@ import ttkbootstrap as ttk
 from PIL import ImageTk, Image
 from ttkbootstrap.constants import *
 
+from database_modules import SQLiteVerify
 from resources.constants import *
-from window_modules import DocumentsViewer, FidelityCardViewer, DeliveriesViewer
+from window_modules import DocumentsViewer, FidelityCardViewer, DeliveriesViewer, CustomersViewer, CashFlowViewer
 
 
 class OpenStoreManager(ttk.Window):
@@ -44,7 +45,8 @@ class OpenStoreManager(ttk.Window):
         self.cash_register_image = ImageTk.PhotoImage(Image.open("resources/assets/cash_register.png"))
         self.cash_register_button = ttk.Button(self.top_bar_frame,
                                                text="Flussi cassa",
-                                               compound=LEFT, image=self.cash_register_image)
+                                               compound=LEFT, image=self.cash_register_image,
+                                               command=self.open_cash_flow_window)
         self.cash_register_button.grid(column=1, row=0, padx=1)
         self.delivery_image = ImageTk.PhotoImage(Image.open("resources/assets/delivery.png"))
         self.delivery_button = ttk.Button(self.top_bar_frame,
@@ -52,14 +54,24 @@ class OpenStoreManager(ttk.Window):
                                           compound=LEFT, image=self.delivery_image,
                                           command=self.open_deliveries_window)
         self.delivery_button.grid(column=2, row=0, padx=1)
-        self.vertical_separator = ttk.Separator(self.top_bar_frame, orient=VERTICAL)
-        self.vertical_separator.grid(column=3, row=0, padx=1)
         self.documents_image = ImageTk.PhotoImage(Image.open("resources/assets/document.png"))
         self.documents_button = ttk.Button(self.top_bar_frame,
                                            text="Documenti",
                                            compound=LEFT, image=self.documents_image,
                                            command=self.open_documents_window)
         self.documents_button.grid(column=4, row=0, padx=1)
+        self.customers_image = ImageTk.PhotoImage(Image.open("resources/assets/customer.png"))
+        self.customers_button = ttk.Button(self.top_bar_frame,
+                                           text="Clienti",
+                                           compound=LEFT, image=self.customers_image,
+                                           command=self.open_customers_window)
+        self.customers_button.grid(column=5, row=0, padx=1)
+        self.suppliers_image = ImageTk.PhotoImage(Image.open("resources/assets/supplier.png"))
+        self.suppliers_button = ttk.Button(self.top_bar_frame,
+                                           text="Fornitori",
+                                           compound=LEFT, image=self.suppliers_image,
+                                           command=self.open_suppliers_window)
+        self.suppliers_button.grid(column=6, row=0, padx=1)
 
         # Dashboard
         self.dashboard_label_frame = ttk.LabelFrame(self, text="Dashboard")
@@ -99,9 +111,20 @@ class OpenStoreManager(ttk.Window):
         win = FidelityCardViewer(master=self, win_title=f"{FORMAL_NAME} - Gestione fidelity card")
         win.focus_set()
 
+    def open_cash_flow_window(self):
+        win = CashFlowViewer(master=self, win_title=f"{FORMAL_NAME} - Gestione cassa")
+        win.focus_set()
+
     def open_deliveries_window(self):
         win = DeliveriesViewer(master=self, win_title=f"{FORMAL_NAME} - Gestione consegne")
         win.focus_set()
+
+    def open_customers_window(self):
+        win = CustomersViewer(master=self, win_title=f"{FORMAL_NAME} - Gestione clienti")
+        win.focus_set()
+
+    def open_suppliers_window(self):
+        raise NotImplementedError("Funzione non implementata")
 
     def set_status(self, status):
         self.status_bar.configure(text=status)
@@ -112,6 +135,7 @@ if __name__ == "__main__":
     if darkdetect.isDark():
         theme = "flatly"
     elif darkdetect.isLight():
-        theme = "litera"
+        theme = "flatly"
     app = OpenStoreManager(themename=theme)
+    SQLiteVerify()
     app.mainloop()
