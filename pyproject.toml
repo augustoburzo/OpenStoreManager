@@ -14,5 +14,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://www.augustoburzo.com"
- 
+Homepage = "https://github.com/augustoburzo/OpenStoreManager.git"
+

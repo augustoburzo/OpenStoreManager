@@ -13,10 +13,10 @@ class SQLiteVerify:
         # Creazione tabella Fidelity Card
         _SQL = """
 CREATE TABLE IF NOT EXISTS "fidelity_card" (
-	"id"	INTEGER NOT NULL UNIQUE,
+	"id"	        INTEGER NOT NULL UNIQUE,
 	"id_cliente"	NUMERIC NOT NULL,
-	"punteggio"	INTEGER,
-	"credito"	NUMERIC,
+	"punteggio"	    INTEGER,
+	"credito"	    NUMERIC,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 """
@@ -25,15 +25,15 @@ CREATE TABLE IF NOT EXISTS "fidelity_card" (
         # Creazione tabella Clienti
         _SQL = """
 CREATE TABLE IF NOT EXISTS "customers" (
-    "id" INTEGER NOT NULL UNIQUE,
-    "nome_cliente"  TEXT,
-    "cognome_cliente" TEXT,
-    "telefono"  TEXT,
-    "cellulare" TEXT,
-    "email" TEXT,
-    "indirizzo"    TEXT,
-    "cap"   TEXT,
-    "comune"    TEXT,
+    "id"                INTEGER NOT NULL UNIQUE,
+    "nome_cliente"      TEXT,
+    "cognome_cliente"   TEXT,
+    "telefono"          TEXT,
+    "cellulare"         TEXT,
+    "email"             TEXT,
+    "indirizzo"         TEXT,
+    "cap"               TEXT,
+    "comune"            TEXT,
     PRIMARY KEY("id" AUTOINCREMENT)
 );
 """
