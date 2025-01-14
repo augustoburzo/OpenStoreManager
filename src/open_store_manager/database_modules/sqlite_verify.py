@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS "customers" (
     "indirizzo"         TEXT,
     "cap"               TEXT,
     "comune"            TEXT,
+    "note"              TEXT,
     PRIMARY KEY("id" AUTOINCREMENT)
 );
 """
